@@ -19,6 +19,7 @@ export default function InstructorLogin() {
     try {
       const res = await api.post('/instructors/login', { username, password })
       localStorage.setItem('instructor', JSON.stringify(res.data.instructor))
+      localStorage.setItem('instructorToken', res.data.token)
       nav('/portal/dashboard')
     } catch (err) {
       setError(err?.response?.data?.message || 'Login failed')

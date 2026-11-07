@@ -45,6 +45,7 @@ export default function InstructorDashboard() {
 
   function logout() {
     localStorage.removeItem('instructor')
+    localStorage.removeItem('instructorToken')
     nav('/portal', { replace: true })
   }
 
@@ -58,9 +59,6 @@ export default function InstructorDashboard() {
           <div className="text-sm text-zinc-600">
             @{instructor.username} • {instructor.department} • role: <b>{instructor.role}</b>
           </div>
-          {instructor.apiKey && (
-            <div className="text-sm mt-1">API key: <code>{instructor.apiKey}</code></div>
-          )}
         </div>
         <button onClick={logout} className="btn">Log out</button>
       </div>
@@ -95,7 +93,7 @@ export default function InstructorDashboard() {
           {directory.map(d => (
             <div key={d._id} className="text-sm border border-zinc-200 rounded-lg p-2">
               <div className="font-medium">{d.name}</div>
-              <div className="text-zinc-600">{d.department} • {d.role}</div>
+              <div className="text-zinc-600">{d.department}</div>
             </div>
           ))}
           {directory.length === 0 && <div className="text-sm text-zinc-600">No instructors.</div>}
